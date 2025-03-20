@@ -200,27 +200,31 @@ if not input_invalid:
     # Lab Week 06 - Question 6
     num_dream_lvls = -1 # Initialize the number of dream levels
     while (num_dream_lvls < 0 or num_dream_lvls > 3):
-        # Call Recursive function
-        print("    |", end="    ")
-        num_dream_lvls = input("How many dream levels do you want to go down? (Enter a number 0-3)")
-        # If the value entered was not an integer, set the number of dream levels to -1 and loop again 
-        if ((num_dream_lvls == "")):
-            num_dream_lvls = -1
-            print("Number entered must be a whole number between 0-3 inclusive, try again")
-    
-        else:
-            num_dream_lvls = int(num_dream_lvls)
+
+        try:
+            # Call Recursive function
+            print("    |", end="    ")
+            num_dream_lvls = int(input("How many dream levels do you want to go down? (Enter a number 0-3)"))
+            # If the value entered was not an integer, set the number of dream levels to -1 and loop again 
+            
 
             if ((num_dream_lvls < 0) or (num_dream_lvls > 3)):
-                num_dream_lvls = -1
                 print("Number entered must be a whole number between 0-3 inclusive, try again")
-            elif (not num_dream_lvls == 0):
+                continue
+
+
+            if (not num_dream_lvls == 0):
                 hero.health_points -= 1
                 crazy_level = functions.inception_dream(num_dream_lvls)
                 hero.combat_strength += crazy_level
                 print("combat strength: " + str(hero.combat_strength))
                 print("health points: " + str(hero.health_points))
-        print("num_dream_lvls: ", num_dream_lvls)
+            print("num_dream_lvls: ", num_dream_lvls)
+
+        except ValueError:
+            num_dream_lvls = -1
+            print(f"ValueError: Enter a valid number from 0-3")
+
 
     # Fight Sequence
     # Loop while the monster and the player are alive. Call fight sequence functions
