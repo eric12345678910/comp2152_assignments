@@ -6,7 +6,6 @@ class Character:
 
     def __del__(self):
         print("The character object is being destroyed by the garbage collector")
-        super().__del__()
 
     # Getters / Setters: Combat strength
     @property
