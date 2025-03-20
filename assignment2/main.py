@@ -5,6 +5,9 @@ import os
 
 # Put all the functions into another file and import them
 import functions
+from hero import Hero
+from monster import Monster
+
 
 # Define two Dice
 small_dice_options = list(range(1, 7))
@@ -43,8 +46,7 @@ while input_invalid and i in range(5):
         print("    |", end="    ")
         m_combat_strength = int(input("Enter the monster's combat Strength (1-6): "))
 
-
-
+        
         # Note: Now safe to cast combat_strength to integer
         # Validate input: Check if the string inputted
         if (combat_strength not in range(1, 7)) or (m_combat_strength) not in range(1, 7):
@@ -120,6 +122,22 @@ if not input_invalid:
     m_health_points = random.choice(big_dice_options)
     print("    |    Player rolled " + str(m_health_points) + " health points for the monster")
 
+
+
+    #####################################################      
+    # #####################################################
+    # #####################################################
+    # #####################################################
+    # #####################################################
+    # #####################################################
+    #  
+
+    ##################################################### OBJECTS CREATED
+    # Instantiate Hero and Monster objects
+    hero = Hero(combat_strength, health_points)
+    monster = Monster(m_combat_strength, m_health_points)
+
+
     # Collect Loot
     print("    ------------------------------------------------------------------")
     print("    |    !!You find a loot bag!! You look inside to find 2 items:")
@@ -140,16 +158,16 @@ if not input_invalid:
     print("    |    Your belt: ", belt)
 
     # Use Loot
-    belt, health_points = functions.use_loot(belt, health_points)
+    belt, hero.health_points = functions.use_loot(belt, hero.health_points)
 
     print("    ------------------------------------------------------------------")
     print("    |", end="    ")
     input("Analyze the roll (Press enter)")
     # Compare Player vs Monster's strength
-    print("    |    --- You are matched in strength: " + str(combat_strength == m_combat_strength))
+    print("    |    --- You are matched in strength: " + str(hero.combat_strength == monster.combat_strength))
 
     # Check the Player's overall strength and health
-    print("    |    --- You have a strong player: " + str((combat_strength + health_points) >= 15))
+    print("    |    --- You have a strong player: " + str((hero.combat_strength + hero.health_points) >= 15))
 
     # Roll for the monster's power
     print("    |", end="    ")
@@ -173,9 +191,9 @@ if not input_invalid:
     power_roll = random.choice(["Fire Magic", "Freeze Time", "Super Hearing"])
 
     # Increase the monster’s combat strength by its power
-    m_combat_strength += min(6, m_combat_strength + monster_powers[power_roll])
+    m_combat_strength += min(6, monster.combat_strength + monster_powers[power_roll])
     print("    |    The monster's combat strength is now " + str(
-        m_combat_strength) + " using the " + power_roll + " magic power")
+        monster.combat_strength) + " using the " + power_roll + " magic power")
 
     # Lab Week 06 - Question 6
     num_dream_lvls = -1 # Initialize the number of dream levels
@@ -195,18 +213,18 @@ if not input_invalid:
                 num_dream_lvls = -1
                 print("Number entered must be a whole number between 0-3 inclusive, try again")
             elif (not num_dream_lvls == 0):
-                health_points -= 1
+                hero.health_points -= 1
                 crazy_level = functions.inception_dream(num_dream_lvls)
-                combat_strength += crazy_level
-                print("combat strength: " + str(combat_strength))
-                print("health points: " + str(health_points))
+                hero.combat_strength += crazy_level
+                print("combat strength: " + str(hero.combat_strength))
+                print("health points: " + str(hero.health_points))
         print("num_dream_lvls: ", num_dream_lvls)
 
     # Fight Sequence
     # Loop while the monster and the player are alive. Call fight sequence functions
     print("    ------------------------------------------------------------------")
     print("    |    You meet the monster. FIGHT!!")
-    while m_health_points > 0 and health_points > 0:
+    while monster.health_points > 0 and hero.health_points > 0:
         # Fight Sequence
         print("    |", end="    ")
 
@@ -216,35 +234,35 @@ if not input_invalid:
         if not (attack_roll % 2 == 0):
             print("    |", end="    ")
             input("You strike (Press enter)")
-            m_health_points = functions.hero_attacks(combat_strength, m_health_points)
-            if m_health_points == 0:
+            monster.health_points = functions.hero_attacks(hero.combat_strength, monster.health_points)
+            if monster.health_points == 0:
                 num_stars = 3
             else:
                 print("    |", end="    ")
                 print("------------------------------------------------------------------")
                 input("    |    The monster strikes (Press enter)!!!")
-                health_points = functions.monster_attacks(m_combat_strength, health_points)
-                if health_points == 0:
+                hero.health_points = functions.monster_attacks(monster.combat_strength, hero.health_points)
+                if hero.health_points == 0:
                     num_stars = 1
                 else:
                     num_stars = 2
         else:
             print("    |", end="    ")
             input("The Monster strikes (Press enter)")
-            health_points = functions.monster_attacks(m_combat_strength, health_points)
-            if health_points == 0:
+            hero.health_points = functions.monster_attacks(monster.combat_strength, hero.health_points)
+            if hero.health_points == 0:
                 num_stars = 1
             else:
                 print("    |", end="    ")
                 print("------------------------------------------------------------------")
                 input("The hero strikes!! (Press enter)")
-                m_health_points = functions.hero_attacks(combat_strength, m_health_points)
-                if m_health_points == 0:
+                monster.health_points = functions.hero_attacks(hero.combat_strength, monster.health_points)
+                if monster.health_points == 0:
                     num_stars = 3
                 else:
                     num_stars = 2
 
-    if(m_health_points <= 0):
+    if(monster.health_points <= 0):
         winner = "Hero"
     else:
         winner = "Monster"

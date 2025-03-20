@@ -2,7 +2,7 @@ class Character:
 
     def __init__(self, combat_strength, health_points):
         self.__combat_strength = combat_strength
-        self.health_points = health_points
+        self.__health_points = health_points
 
     # Getters / Setters: Combat strength
     @property
@@ -20,6 +20,6 @@ class Character:
         return self.__health_points
     
     @health_points.setter
-    def chealth_points(self, value):
+    def health_points(self, value):
         self.__health_points = value
  
