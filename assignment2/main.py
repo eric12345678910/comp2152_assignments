@@ -132,6 +132,8 @@ if not input_invalid:
     # #####################################################
     #  
 
+
+
     ##################################################### OBJECTS CREATED
     # Instantiate Hero and Monster objects
     hero = Hero(combat_strength, health_points)
@@ -234,14 +236,14 @@ if not input_invalid:
         if not (attack_roll % 2 == 0):
             print("    |", end="    ")
             input("You strike (Press enter)")
-            monster.health_points = functions.hero_attacks(hero.combat_strength, monster.health_points)
+            monster.health_points = hero.hero_attacks(monster)
             if monster.health_points == 0:
                 num_stars = 3
             else:
                 print("    |", end="    ")
                 print("------------------------------------------------------------------")
                 input("    |    The monster strikes (Press enter)!!!")
-                hero.health_points = functions.monster_attacks(monster.combat_strength, hero.health_points)
+                hero.health_points = monster.monster_attacks(hero)
                 if hero.health_points == 0:
                     num_stars = 1
                 else:
@@ -249,14 +251,14 @@ if not input_invalid:
         else:
             print("    |", end="    ")
             input("The Monster strikes (Press enter)")
-            hero.health_points = functions.monster_attacks(monster.combat_strength, hero.health_points)
+            hero.health_points = monster.monster_attacks(hero)
             if hero.health_points == 0:
                 num_stars = 1
             else:
                 print("    |", end="    ")
                 print("------------------------------------------------------------------")
                 input("The hero strikes!! (Press enter)")
-                monster.health_points = functions.hero_attacks(hero.combat_strength, monster.health_points)
+                monster.health_points = hero.hero_attacks(monster)
                 if monster.health_points == 0:
                     num_stars = 3
                 else:

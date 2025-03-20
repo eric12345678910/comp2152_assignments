@@ -4,6 +4,10 @@ class Character:
         self.__combat_strength = combat_strength
         self.__health_points = health_points
 
+    def __del__(self):
+        print("The character object is being destroyed by the garbage collector")
+        super().__del__()
+
     # Getters / Setters: Combat strength
     @property
     def combat_strength(self):
