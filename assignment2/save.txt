@@ -3,3 +3,14 @@ Hero Ert has killed a monster and gained 3 stars.
 Hero myh has killed a monster and gained 3 stars.
 Hero erl has killed a monster and gained 3 stars.
 Hero erl has killed a monster and gained 3 stars.
+Monster has killed the hero previously
+Hero HeN has killed a monster and gained 3 stars.
+A total of 5 monsters have been killed
+Hero het has killed a monster and gained 3 stars.
+A total of 6 monsters have been killed
+Hero tel has killed a monster and gained 3 stars.
+A total of 7 monsters have been killed
+Hero ant has killed a monster and gained 3 stars.
+A total of 8 monsters have been killed
+Hero bib has killed a monster and gained 3 stars.
+A total of 9 monsters have been killed

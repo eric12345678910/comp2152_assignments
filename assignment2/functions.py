@@ -5,6 +5,8 @@ import random
 # print("Inside function.py")
 
 
+
+
 def use_loot(belt, health_points):
     good_loot_options = ["Health Potion", "Leather Boots"]
     bad_loot_options = ["Poison Potion"]
@@ -80,6 +82,8 @@ def save_game(winner, hero_name="", num_stars=0):
         elif winner == "Monster":
             file.write("Monster has killed the hero previously\n")
 
+        file.write(f"A total of {count_monsters_killed()} monsters have been killed\n")
+
 # Lab 06 - Question 5a
 def load_game():
     try:
@@ -89,6 +93,7 @@ def load_game():
             if lines:
                 last_line = lines[-1].strip()
                 print(last_line)
+
                 return last_line
     except FileNotFoundError:
         print("No previous game found. Starting fresh.")
@@ -111,3 +116,45 @@ def adjust_combat_strength(combat_strength, m_combat_strength):
             print("    |    ... Based on your previous game, neither the hero nor the monster's combat strength will be increased")
 
 
+
+
+def count_monsters_killed():
+    monstersKilled = 0
+    try:
+        with open("save.txt", "r") as file:
+            lines = file.readlines()
+
+            for line in lines:
+                singleLine = line.split()
+        
+                if(singleLine[0] == "Hero"):
+                    monstersKilled +=1
+                else: continue
+
+            return monstersKilled
+            
+    except FileNotFoundError:
+        print("No previous game found.")
+    return None
+            
+
+
+def read_monsters_killed():
+    try:
+        with open("save.txt", "r") as file:
+            lines = file.readlines()
+        
+            monstersKilledMessage = ""
+
+            for line in lines:
+                if("A total of" in line):
+                    monstersKilledMessage = line
+                else: 
+                    continue
+            
+            # Print last occurance of Total Monsters Killed message
+            print(monstersKilledMessage)
+            
+    except FileNotFoundError:
+        print("No previous game found.")
+    return None

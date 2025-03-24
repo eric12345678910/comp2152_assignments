@@ -14,8 +14,9 @@ class Character:
     
     @combat_strength.setter
     def combat_strength(self, value):
+        if(value < 0):
+            raise ValueError("Error: combat strength cannot be negative")
         self.__combat_strength = value
-
 
     # Getters / Setters: Health points
     @property
@@ -24,5 +25,7 @@ class Character:
     
     @health_points.setter
     def health_points(self, value):
+        if(value < 0):
+            raise ValueError("Error: health points cannot be negative")
         self.__health_points = value
  

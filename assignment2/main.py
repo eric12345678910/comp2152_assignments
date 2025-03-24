@@ -1,13 +1,22 @@
 # Import the random library to use for the dice later
 import random
-import os
-
 
 # Put all the functions into another file and import them
 import functions
 from hero import Hero
 from monster import Monster
 
+# Import modules to output python version and computer os
+import os
+import platform
+
+print("----------------------------")
+print("Operating system: ", os.name)
+print("Python version: ", platform.python_version())
+print("----------------------------")
+
+# Display total monsters killed all-time
+functions.read_monsters_killed()
 
 # Define two Dice
 small_dice_options = list(range(1, 7))
@@ -159,6 +168,7 @@ if not input_invalid:
     belt.sort()
     print("    |    Your belt: ", belt)
 
+    print("\nfunctions.useloot: ", functions.use_loot(belt, hero.health_points))
     # Use Loot
     belt, hero.health_points = functions.use_loot(belt, hero.health_points)
 
