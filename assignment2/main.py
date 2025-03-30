@@ -204,13 +204,16 @@ if not input_invalid:
     # 
     weapon_quality = ""
     if weapon_roll <= 2:
-        weapon_quality = "--- You rolled a weak weapon, friend"
+        quality_message = "--- You rolled a weak weapon, friend"
+        weapon_quality = "weak"
     elif weapon_roll <= 4:
-        weapon_quality = "--- Your weapon is meh"
+        quality_message = "--- Your weapon is meh"
+        weapon_quality = "meh"
     else:
-        weapon_quality = "--- Nice weapon, friend!"
+        quality_message = "--- Nice weapon, friend!"
+        weapon_quality = "nice"
 
-    print(weapon_quality)
+    print(quality_message)
 
     # ----------------------------------------------------------------- Log Moves
     hero_summary["weapon_quality"].append(weapon_quality)
@@ -234,6 +237,9 @@ if not input_invalid:
     m_health_points = random.choice(big_dice_options)
     print("    |    Player rolled " + str(m_health_points) + " health points for the monster")
 
+    # ----------------------------------------------------------------- Log Moves
+    hero_summary["health_points"].append(health_points)
+    monster_summary["health_points"].append(m_health_points)
 
 
     #####################################################      
@@ -266,6 +272,12 @@ if not input_invalid:
 
     # Collect Loot Second time
     loot_options, belt = functions.collect_loot(loot_options, belt)
+
+    # ----------------------------------------------------------------- Log Moves
+    hero_summary["health_points"].append(health_points)
+    print(f"\n\n278. hero_summary: {hero_summary}\n\n")
+
+
 
     print("    |    You're super neat, so you organize your belt alphabetically:")
     belt.sort()
