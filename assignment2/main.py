@@ -10,24 +10,46 @@ from monster import Monster
 import os
 import platform
 
-print("----------------------------")
+print("    ------------------------------------------------------------------")
 print("Operating system: ", os.name)
 print("Python version: ", platform.python_version())
-print("----------------------------")
+print("    ------------------------------------------------------------------")
 
 # Display total monsters killed all-time
 # functions.read_monsters_killed()
 
+
+# Crate variables to hold the game summary
+hero_summary = {
+    "combat_strength" : [],
+    "health_points" : [],
+    "weapon": [],
+    "weapon_quality": [],
+    "loot": []
+}
+
+monster_summary = {
+    "combat_strength" : [],
+    "health_points" : [],
+    # "weapon": []
+}
+
+
+
+
+# Main Menu
 print("\n1. Play")
 print("2. Sign in")
 print("3. Create an account\n")
 menu_selection = str(input("Please select an option: [1, 2, 3]"))
 
+current_user = ""
+
 match menu_selection:
 
     case "1":
         print("You selected option 1: Play\n")
-        exit()
+        exit
 
     case "2":
         print("You selected option 2: Sign in")   
@@ -37,7 +59,7 @@ match menu_selection:
         # Sign in successful
         if functions.verify_user(username, password): 
             print("user verified")
-            exit()
+            current_user = username
 
         # Sign in failed 
         else:
@@ -66,7 +88,12 @@ match menu_selection:
             functions.create_user(username, password)
         
 
-    
+# Display user playing card    
+functions.playing_card(current_user)
+
+
+
+# ---------------------------------------------------------------   Initialize Game
 
 
 # Define two Dice
@@ -94,9 +121,9 @@ num_stars = 0
 i = 0
 input_invalid = True
 
+# User has 5 attempts before program ends
 while input_invalid and i in range(5):
     
-
     print("    ------------------------------------------------------------------")
     print("    |", end="    ")
 
@@ -129,6 +156,14 @@ if not input_invalid:
     combat_strength = int(combat_strength)
     m_combat_strength = int(m_combat_strength)
 
+    # ----------------------------------------------------------------- Log Moves
+    hero_summary["combat_strength"].append(combat_strength)
+    monster_summary["combat_strength"].append(m_combat_strength)
+
+    print(f"\n\nhero summary: {hero_summary}")
+    print(f"monster summary: {monster_summary}\n\n")
+
+
     # Roll for weapon
     print("    |", end="    ")
     input("Roll the dice for your weapon (Press enter)")
@@ -148,9 +183,14 @@ if not input_invalid:
     print(ascii_image5)
     weapon_roll = random.choice(small_dice_options)
 
+
     # Limit the combat strength to 6
     combat_strength = min(6, (combat_strength + weapon_roll))
-    print("    |    The hero\'s weapon is " + str(weapons[weapon_roll - 1]))
+    weapon = str(weapons[weapon_roll - 1])
+    print("    |    The hero\'s weapon is " + weapon)
+
+    # ----------------------------------------------------------------- Log Moves
+    hero_summary["weapon"].append(weapon)
 
     # Lab 06 - Question 5b
     functions.adjust_combat_strength(combat_strength, m_combat_strength)
@@ -160,12 +200,23 @@ if not input_invalid:
     print("    |", end="    ")
     input("Analyze the Weapon roll (Press enter)")
     print("    |", end="    ")
+    
+    # 
+    weapon_quality = ""
     if weapon_roll <= 2:
-        print("--- You rolled a weak weapon, friend")
+        weapon_quality = "--- You rolled a weak weapon, friend"
     elif weapon_roll <= 4:
-        print("--- Your weapon is meh")
+        weapon_quality = "--- Your weapon is meh"
     else:
-        print("--- Nice weapon, friend!")
+        weapon_quality = "--- Nice weapon, friend!"
+
+    print(weapon_quality)
+
+    # ----------------------------------------------------------------- Log Moves
+    hero_summary["weapon_quality"].append(weapon_quality)
+
+
+    print(f"\n\n219: hero_summary: \n{hero_summary}\n\n")
 
     # If the weapon rolled is not a Fist, print out "Thank goodness you didn't roll the Fist..."
     if weapons[weapon_roll - 1] != "Fist":

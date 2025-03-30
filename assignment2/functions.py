@@ -236,3 +236,24 @@ def read_monsters_killed():
         print("No previous game found.")
     return None
 
+def playing_card(username):
+    print("-------------------------------------------")
+    print(f"The Hero {username}")
+    print("Level: ") # relative to total monsters killed (or win/loss %) - maybe a combination of the two
+                    # games played - experience - newbie, rookie, amateur, hobbiest, enthusiast
+                    # win % = adjectives for success (top)
+                    # total kills = adjectives for killer (slayer)
+
+
+    print("Hero Ranking: ") # out of number out of total accounts
+    print("Monsters killed: ")
+    print("Win %: ")
+    print("Damage delt: ")
+    print("Damage taken: ")
+
+    print("Weapon of choice: ")
+    print("Sleep number") #most common level of sleep / total levels of sleep
+
+
+
+    print("-------------------------------------------")
