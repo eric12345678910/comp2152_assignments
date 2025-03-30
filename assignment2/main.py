@@ -67,25 +67,7 @@ match menu_selection:
 
         
     case "3":
-        # Account Creation
-        print("\nOption 3: Create an account\n")
-
-        # Enter and Verify Username
-        username = input("Enter a username: ")
-
-        # Check if username is available
-        if not functions.username_available(username):
-            print("Username is not available.")
-
-        # Enter Verify Password
-        password = input("Enter a password: ")
-        confirm_password = input("Confirm your password: ")
-
-        # Password entry is confirmed 
-        if functions.verify_passwords_match(password, confirm_password):
-            
-            # Create a user account
-            functions.create_user(username, password)
+        functions.create_user()
         
 
 # Display user playing card    
