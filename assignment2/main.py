@@ -16,7 +16,58 @@ print("Python version: ", platform.python_version())
 print("----------------------------")
 
 # Display total monsters killed all-time
-functions.read_monsters_killed()
+# functions.read_monsters_killed()
+
+print("\n1. Play")
+print("2. Sign in")
+print("3. Create an account\n")
+menu_selection = str(input("Please select an option: [1, 2, 3]"))
+
+match menu_selection:
+
+    case "1":
+        print("You selected option 1: Play\n")
+        exit()
+
+    case "2":
+        print("You selected option 2: Sign in")   
+        username = input("Enter a username: ")
+        password = input("Enter a password: ")
+
+        # Sign in successful
+        if functions.verify_user(username, password): 
+            print("user verified")
+            exit()
+
+        # Sign in failed 
+        else:
+            print("Sign in failed. Try again!")
+
+        
+    case "3":
+        # Account Creation
+        print("\nOption 3: Create an account\n")
+
+        # Enter and Verify Username
+        username = input("Enter a username: ")
+
+        # Check if username is available
+        if not functions.username_available(username):
+            print("Username is not available.")
+
+        # Enter Verify Password
+        password = input("Enter a password: ")
+        confirm_password = input("Confirm your password: ")
+
+        # Password entry is confirmed 
+        if functions.verify_passwords_match(password, confirm_password):
+            
+            # Create a user account
+            functions.create_user(username, password)
+        
+
+    
+
 
 # Define two Dice
 small_dice_options = list(range(1, 7))
@@ -51,6 +102,7 @@ while input_invalid and i in range(5):
 
     # Try block to validate input
     try:
+        
         combat_strength = int(input("Enter your combat Strength (1-6): "))
         print("    |", end="    ")
         m_combat_strength = int(input("Enter the monster's combat Strength (1-6): "))

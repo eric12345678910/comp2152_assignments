@@ -1,10 +1,6 @@
 # Import the random library to use for the dice later
 import random
-
-# Will the line below print when you import function.py into main.py?
-# print("Inside function.py")
-
-
+import os
 
 
 def use_loot(belt, health_points):
@@ -84,7 +80,88 @@ def save_game(winner, hero_name="", num_stars=0):
 
         file.write(f"A total of {count_monsters_killed()} monsters have been killed\n")
 
-# Lab 06 - Question 5a
+
+# Account
+def create_user(username, password):
+    
+    # Create accounts.txt if it doesn't already exist 
+    if not os.path.exists("accounts.txt"):
+        with open("accounts.txt", "w") as file:
+            print("Creating accounts.txt file...")
+
+    
+    # Append account information to file
+    with open("accounts.txt", "a+") as file:
+            print("Appending to accounts.txt...")
+            file.write(f"\n{username}::{password}")
+
+
+def username_available(username):
+
+    # Verify accounts.txt file exists 
+    if not os.path.exists("accounts.txt"):    
+        with open("accounts.txt", "w") as file:
+            print("Creating accounts.txt file...")
+
+        # If no file exists, all usernames are available
+        return True
+    
+
+    with open("accounts.txt", "r") as file:
+        print("Checking availability of username...")
+        
+        # Iterate through account file
+        for line in file.readlines():
+            print(f"line.strip(): {line.strip()}\n")
+
+            # Taking the first position of [username, password]
+            username_on_file = line.strip().split("::")[0]
+            print(f"username_on_file: {username_on_file}")
+
+            if(username_on_file != username):
+                continue
+            else:
+                print(f"I'm sorry, we already have a {username}. Do you go by any other name?")
+                return False
+
+        print(f"I've never met a {username} in person before. Welcome aboard!") 
+        return True
+        
+    
+# Verify user's password matches the second entry
+def verify_passwords_match(password, confirm_password):
+    if password == confirm_password:
+        return True
+    else:
+        print("Error: Password do not match")
+        return False
+
+
+# Verify user's account access
+def verify_user(username, password):
+    # Verify accounts file exists.
+    if not os.path.exists("accounts.txt"):
+        print("Error: Accounts could not be found.")
+        return False
+    
+    # Open and iterate through the acocunts file
+    with open("accounts.txt", "r") as file:
+        lines = file.readlines()
+        for line in lines:
+            # Assign username and passwords to variables
+            username_on_file = line.strip().split("::")[0]
+            password_on_file = line.strip().split("::")[1]
+
+            if(username == username_on_file and password == password_on_file):
+                print("Account verified.")
+                return True
+            
+        # No accounts match username and password
+        print("Error: Invalid username or password.")
+        return False
+
+
+
 def load_game():
     try:
         with open("save.txt", "r") as file:
@@ -158,3 +235,4 @@ def read_monsters_killed():
     except FileNotFoundError:
         print("No previous game found.")
     return None
+
