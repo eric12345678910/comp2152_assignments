@@ -7,7 +7,6 @@ class Hero(Character):
 
         # Other properties to be set during the match
         self.weapon = None
-        self.weapon_quality = None
         self.loot =  []
         self.total_damage_delt = None
         self.total_damage_received = None
@@ -22,7 +21,7 @@ class Hero(Character):
     def show_hero_summary(self):
         stats = super().show_stats()
         print("\nstats:\n", stats)
-        
+
 
 
     # Hero's Attack Function

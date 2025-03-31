@@ -4,7 +4,7 @@ class User:
     # Initialize user
     def __init__(self, username, password):
         self.username = username
-        self.username = password
+        self.password = password
 
     # Delete user object
     def __del__(self):
@@ -44,11 +44,11 @@ class User:
                 username_on_file = line.strip().split("::")[0]
                 print(f"username_on_file: {username_on_file}")
 
-                if(username_on_file == username):
-                    print(f"I'm sorry, we already have a {username}. Do you go by any other name?")
+                if(username_on_file == self.username):
+                    print(f"I'm sorry, we already have a {self.username}. Do you go by any other name?")
                     return False
                 
-            print(f"I've never met a {username} in person before. Welcome aboard!") 
+            print(f"I've never met a {self.username} in person before. Welcome aboard!") 
             return True
         
     # Verify user's password matches the second entry

@@ -21,25 +21,8 @@ print("    ------------------------------------------------------------------")
 # functions.read_monsters_killed()
 
 
-# Crate variables to hold the game summary
-hero_summary = {
-    "combat_strength" : [],
-    "health_points" : [],
-    "weapon": [],
-    "weapon_quality": [],
-    "loot": []
-}
 
-monster_summary = {
-    "combat_strength" : [],
-    "health_points" : [],
-    # "weapon": []
-}
-
-
-
-
-# Main Menu
+# ---------------------------------------------------------------   Main Menu
 print("\n1. Play Now!")
 print("2. Sign in")
 print("3. Create an account\n")
@@ -48,13 +31,13 @@ menu_selection = str(input("Please select an option: [1, 2, 3]"))
 current_user = ""
 
 match menu_selection:
-
     case "1":
-        print("\n[1] Play Now! ]")
+        print("\n[1] Play Now! ")
         
-
     case "2":
         print("\n[2] Sign in")   
+
+        # Input sign in details
         username = input("Enter a username: ")
         password = input("Enter a password: ")
 
@@ -73,16 +56,14 @@ match menu_selection:
         
     case "3":
         print("\n[3] Create an account]")
-        functions.create_user()
+        functions.create_user_account()
         
 
 # Display user playing card    
 functions.playing_card(current_user)
 
 
-
 # ---------------------------------------------------------------   Initialize Game
-
 
 # Define two Dice
 small_dice_options = list(range(1, 7))

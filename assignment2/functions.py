@@ -178,9 +178,7 @@ def playing_card(username):
 
 # Create an account file in accounts.txt
 def create_account():
-    # Account Creation
-        print("\nOption 3: Create an account\n")
-
+   
         # Enter and Verify Username
         username = input("Enter a username: ")
 
@@ -188,7 +186,7 @@ def create_account():
         user = user.User(username, "")
 
         # Check if username is available
-        if not user.username_available(username):
+        if not user.username_available():
             print("Username is not available.")
             return
 
