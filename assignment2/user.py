@@ -6,11 +6,12 @@ class User:
         self.username = username
         self.username = password
 
+    # Delete user object
     def __del__(self):
          print("User object is being deleted...")
          
 
-    def create_user(self):
+    def create_user_account(self):
         # Create accounts.txt if it doesn't already exist 
         if not os.path.exists("accounts.txt"):
             with open("accounts.txt", "w") as file:
@@ -18,12 +19,12 @@ class User:
 
         # Append account information to file
         with open("accounts.txt", "a+") as file:
-                print("Appending to accounts.txt...")
-                file.write(f"\n{self.username}::{self.password}")
+            print("Appending to accounts.txt...")
+            file.write(f"\n{self.username}::{self.password}")
 
-
-    def username_available(username):
-        # Verify accounts.txt file exists 
+    # Check availability of username
+    def username_available(self):
+        # Create accounts.txt if one does not exist
         if not os.path.exists("accounts.txt"):    
             with open("accounts.txt", "w") as file:
                 print("Creating accounts.txt file...")
@@ -51,7 +52,7 @@ class User:
             return True
         
     # Verify user's password matches the second entry
-    def verify_passwords_match(password, confirm_password):
+    def confirm_password(password, confirm_password):
         if password == confirm_password:
             return True
         else:
