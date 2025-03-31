@@ -7,6 +7,12 @@ class Character:
     def __del__(self):
         print("The character object is being destroyed by the garbage collector")
 
+
+    def show_stats(self):
+        print(f"Combat Strength: {self.combat_stength}\nHealth Points: {self.health_points}")
+        return (self.combat_strength, self.health_points)
+
+
     # Getters / Setters: Combat strength
     @property
     def combat_strength(self):
