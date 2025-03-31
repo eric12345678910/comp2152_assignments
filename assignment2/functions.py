@@ -2,6 +2,8 @@
 import random
 import os
 import user
+import hero
+import monster
 
 
 def use_loot(belt, health_points):
@@ -171,9 +173,10 @@ def read_monsters_killed():
         print("No previous game found.")
     return None
 
+# TODO: update to work with hero object instead of username
 def playing_card(username):
     print("-------------------------------------------")
-    print(f"{username}: (tbd hero level) Monster Hunter")
+    print(f"{hero.username}... the Monster Hunter!")
     print("Level: ") # relative to total monsters killed (or win/loss %) - maybe a combination of the two
                     # games played - experience - newbie, rookie, amateur, hobbiest, enthusiast
                     # win % = adjectives for success (top)
@@ -194,8 +197,8 @@ def playing_card(username):
     print("-------------------------------------------")
 
 
-
-def create_user():
+# Create an account file in accounts.txt
+def create_account():
     # Account Creation
         print("\nOption 3: Create an account\n")
 
@@ -203,7 +206,7 @@ def create_user():
         username = input("Enter a username: ")
 
         # Initialize user object
-        user = User(username, "")
+        user = user.User(username, "")
 
         # Check if username is available
         if not user.username_available(username):

@@ -49,6 +49,14 @@ class User:
                 
             print(f"I've never met a {username} in person before. Welcome aboard!") 
             return True
+        
+    # Verify user's password matches the second entry
+    def verify_passwords_match(password, confirm_password):
+        if password == confirm_password:
+            return True
+        else:
+            print("Error: Password do not match")
+            return False
             
     # Verify user's account access
     def verify_user(username, password):

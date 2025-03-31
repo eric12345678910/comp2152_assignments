@@ -5,9 +5,25 @@ class Hero(Character):
     def __init__(self, combat_strength, health_points):
         super().__init__(combat_strength, health_points)
 
+        # Other properties to be set during the match
+        self.weapon = None
+        self.weapon_quality = None
+        self.loot =  []
+        self.total_damage_delt = None
+        self.total_damage_received = None
+        self.stars_received = None
+
+
     def __del__(self):
         print("The Hero object is being destroyed by the garbage collector")
         super().__del__()
+
+    # Display stats from Hero object
+    def show_hero_summary(self):
+        stats = super().show_stats()
+        print("\nstats:\n", stats)
+        
+
 
     # Hero's Attack Function
     def hero_attacks(self, monster):

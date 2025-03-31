@@ -5,10 +5,12 @@ import random
 import functions
 from hero import Hero
 from monster import Monster
+from user import User
 
 # Import modules to output python version and computer os
 import os
 import platform
+
 
 print("    ------------------------------------------------------------------")
 print("Operating system: ", os.name)
@@ -38,7 +40,7 @@ monster_summary = {
 
 
 # Main Menu
-print("\n1. Play")
+print("\n1. Play Now!")
 print("2. Sign in")
 print("3. Create an account\n")
 menu_selection = str(input("Please select an option: [1, 2, 3]"))
@@ -48,16 +50,19 @@ current_user = ""
 match menu_selection:
 
     case "1":
-        print("You selected option 1: Play\n")
-        exit
+        print("\n[1] Play Now! ]")
+        
 
     case "2":
-        print("You selected option 2: Sign in")   
+        print("\n[2] Sign in")   
         username = input("Enter a username: ")
         password = input("Enter a password: ")
 
+        # Initialize user object
+        user = User(username, password)
+
         # Sign in successful
-        if functions.verify_user(username, password): 
+        if user.verify_user(user): 
             print("user verified")
             current_user = username
 
@@ -67,6 +72,7 @@ match menu_selection:
 
         
     case "3":
+        print("\n[3] Create an account]")
         functions.create_user()
         
 
